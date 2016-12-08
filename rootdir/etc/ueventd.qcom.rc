@@ -25,17 +25,15 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-# the DIAG device node is not world writable/readable.
+# Diag
 /dev/diag                 0660   system     qcom_diag
-
 /dev/genlock              0666   system     system
 /dev/kgsl                 0666   system     system
 /dev/kgsl-3d0             0666   system     system
 /dev/kgsl-2d0             0666   root       root
 /dev/kgsl-2d1             0666   root       root
-/dev/sensors              0666   root       root
 /dev/ion                  0664   system     system
-/dev/rtc0                 0660   system     system
+/dev/rtc0                 0600   system     system
 /dev/smd0                 0660   system     system
 /dev/smd4                 0660   system     system
 /dev/smd_cxm_qmi          0640   radio      radio
@@ -49,11 +47,8 @@
 /dev/rmnet_ctrl           0660   usb        usb
 /dev/dpl_ctrl             0660   usb        usb
 
-/dev/block/bootdevice/by-name/frp 0600 system system
-
-#permissions for CSVT
+# CSVT
 /dev/smd11                0660   radio      radio
-
 /dev/radio0               0640   system     system
 /dev/rfcomm0              0660   bluetooth  bluetooth
 /dev/ttyUSB0              0660   bluetooth  bluetooth
@@ -119,8 +114,12 @@
 /dev/jpeg3                0660   system     camera
 /dev/adsprpc-smd          0664   system     system
 /dev/system_health_monitor 0640  radio      system
+
+# Wlan
 /dev/wcnss_wlan           0660   system     system
 /dev/wcnss_ctrl           0660   system     system
+/sys/devices/soc.0/a000000.qcom,wcnss-wlan/net/wlan0/queues/rx-* rps_cpus           0660   system     system
+/sys/devices/soc.0/a000000.qcom,wcnss-wlan/net/p2p0/queues/rx-* rps_cpus            0660   system     system
 /dev/msm_camera/*         0660   system     camera
 /dev/gemini/              0660   system     camera
 /dev/mercury0             0660   system     camera
@@ -132,7 +131,7 @@
 /dev/hw_random            0600   root       root
 /dev/adsprpc-smd          0664   system     system
 
-#permissions for audio
+# Audio
 /dev/audio_slimslave      0660   system     audio
 /dev/msm_qcelp            0660   system     audio
 /dev/msm_evrc             0660   system     audio
@@ -182,7 +181,7 @@
 /dev/tsc_mux0             0660   media       media
 /dev/tsc_ci0              0660   media       media
 
-# sensors
+# Sensors
 /sys/devices/i2c-12/12-*  pollrate_ms 0664 system system
 /sys/devices/f9925000.i2c/i2c-0/0-*                 enable         0660    input    system
 /sys/devices/f9925000.i2c/i2c-0/0-*                 poll_delay     0660    input    system
@@ -205,20 +204,25 @@
 /sys/devices/virtual/input/input*                   poll           0660    input    system
 /sys/devices/virtual/input/input*                   pollrate_ms    0660    input    system
 
-# ctp
+# CTP
 /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0038/sensors/ft5x06-proximity	enable	0660	input	system
 /sys/devices/virtual/gesture/gesture*		enable	0660	input	system
 /sys/devices/virtual/gesture/gesture*		pocket	0660	input	system
 
-# led
+# LED
 /sys/devices/soc.0/78b5000.i2c/i2c-1/1-0045/leds/red		blink	0660	input	system
 /sys/devices/soc.0/78b5000.i2c/i2c-1/1-0045/leds/green		blink	0660	input	system
 /sys/devices/soc.0/78b5000.i2c/i2c-1/1-0045/leds/blue		blink	0660	input	system
 
-# wlan
+# VM_BMS
+/dev/vm_bms               0660   system     system
+/dev/battery_data         0660   system     system
+
+# WCNSS
 /dev/wcnss_wlan           0660   system     system
 /dev/wcnss_ctrl           0660   system     system
-#nfc permissions
+
+# NFC
 /dev/nfc-nci              0660    nfc         nfc
 /dev/nq-nci               0660    nfc         nfc
 /dev/assd                 0660    nfc         nfc
@@ -237,7 +241,7 @@
 # Ramdump devices
 /dev/ramdump*             0640   system     system
 
-#Improve Touch
+# Improve Touch
 /dev/hbtp_input           0660   system     system
 /dev/hbtp_vm              0660   system     system
 /dev/jdi-bu21150          0660   system     system
@@ -246,7 +250,4 @@
 /dev/ontario              0640   system     system
 
 # Add device block for FRP
-/dev/block/bootdevice/by-name/config    0660   system     system
-
-# For lirc
-/dev/lirc0          0660   system     system
+/dev/block/platform/soc.0/7824900.sdhci/by-name/config    0660   system     system

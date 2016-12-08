@@ -28,6 +28,7 @@
 
 export PATH=/system/bin
 chown -h system:system /sys/devices/soc.0/qpnp-smbcharger-*/BatteryMaxCurrent
+
 # Set platform variables
 target=`getprop ro.board.platform`
 if [ -f /sys/devices/soc0/soc_id ]; then
@@ -35,7 +36,6 @@ if [ -f /sys/devices/soc0/soc_id ]; then
 else
     platformid=`cat /sys/devices/system/soc/soc0/id`
 fi
-
 #
 # Function to start sensors for DSPS enabled platforms
 #
@@ -79,8 +79,6 @@ baseband=`getprop ro.baseband`
 echo 1 > /proc/sys/net/ipv6/conf/default/accept_ra_defrtr
 
 start_sensors
-start_copying_prebuilt_qcril_db
-start_msm_irqbalance_8952
 
 if [ -f /sys/class/graphics/fb0/modes ]; then
 	panel_res=`cat /sys/class/graphics/fb0/modes`
@@ -90,6 +88,8 @@ if [ -f /sys/class/graphics/fb0/modes ]; then
 		panel_xres=${panel_res:2:4}
 	fi
 fi
+
+start_msm_irqbalance_8952
 
 bootmode=`getprop ro.bootmode`
 emmc_boot=`getprop ro.boot.emmc`
@@ -103,12 +103,31 @@ case "$emmc_boot"
 esac
 
 #
-# Make modem config folder and copy firmware config to that folder
+# Copy qcril.db if needed for RIL
 #
+start_copying_prebuilt_qcril_db
+echo 1 > /data/misc/radio/db_check_done
+
+#
+# Make modem config folder and copy firmware config to that folder for RIL
+#
+if [ -f /data/misc/radio/ver_info.txt ]; then
+    prev_version_info=`cat /data/misc/radio/ver_info.txt`
+else
+    prev_version_info=""
+fi
+
+cur_version_info=`cat /firmware/verinfo/ver_info.txt`
+#if [ "$prev_version_info" != "$cur_version_info" ]; then
     rm -rf /data/misc/radio/modem_config
     mkdir /data/misc/radio/modem_config
     chmod 770 /data/misc/radio/modem_config
     cp -r /firmware/image/modem_pr/mcfg/configs/* /data/misc/radio/modem_config
     chown -hR radio.radio /data/misc/radio/modem_config
+    cp /firmware/verinfo/ver_info.txt /data/misc/radio/ver_info.txt
+    chown radio.radio /data/misc/radio/ver_info.txt
+#fi
+#cp /firmware/image/modem_pr/mbn_ota.txt /data/misc/radio/modem_config
+cp /system/etc/mbn_ota.txt /data/misc/radio/modem_config
+chown radio.radio /data/misc/radio/modem_config/mbn_ota.txt
 echo 1 > /data/misc/radio/copy_complete
-chown radio:radio /data/misc/radio/copy_complete

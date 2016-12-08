@@ -356,7 +356,7 @@ struct hw_module_t HAL_MODULE_INFO_SYM = {
     .version_major = 1,
     .version_minor = 0,
     .id = LIGHTS_HARDWARE_MODULE_ID,
-    .name = "bq lights Module",
+    .name = "BQ lights Module",
     .author = "Google, Inc.",
     .methods = &lights_module_methods,
 };

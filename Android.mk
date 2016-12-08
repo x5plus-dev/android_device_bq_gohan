@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2016 The CyanogenMod Project
+# Copyright 2016 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -72,7 +72,8 @@ $(CPE_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 ALL_DEFAULT_INSTALLED_MODULES += $(CPE_SYMLINKS)
 
 CPPF_IMAGES := \
-    cppf.b00 cppf.b01 cppf.b02 cppf.b03 cppf.b04 cppf.b05 cppf.b06 cppf.mdt
+    cppf.b00 cppf.b01 cppf.b02 cppf.b03 cppf.b04 cppf.b05 \
+    cppf.b06 cppf.mdt
 
 CPPF_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(CPPF_IMAGES)))
 $(CPPF_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
@@ -84,12 +85,12 @@ $(CPPF_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 ALL_DEFAULT_INSTALLED_MODULES += $(CPPF_SYMLINKS)
 
 FINGERPR_IMAGES := \
-    fingerpr.b00 fingerpr.b01 fingerpr.b02 fingerpr.b03 fingerpr.b04fingerpr.b05 \
+    fingerpr.b00 fingerpr.b01 fingerpr.b02 fingerpr.b03 fingerpr.b04 fingerpr.b05 \
     fingerpr.b06 fingerpr.mdt
 
 FINGERPR_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(FINGERPR_IMAGES)))
 $(FINGERPR_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
-	@echo "FINGERPR firmware link: $@"
+	@echo "Fingerprint firmware link: $@"
 	@mkdir -p $(dir $@)
 	@rm -rf $@
 	$(hide) ln -sf /firmware/image/$(notdir $@) $@
@@ -102,7 +103,7 @@ GOODIXFP_IMAGES := \
 
 GOODIXFP_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(GOODIXFP_IMAGES)))
 $(GOODIXFP_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
-	@echo "GOODIXFP firmware link: $@"
+	@echo "Goodix FP firmware link: $@"
 	@mkdir -p $(dir $@)
 	@rm -rf $@
 	$(hide) ln -sf /firmware/image/$(notdir $@) $@
@@ -161,7 +162,8 @@ ALL_DEFAULT_INSTALLED_MODULES += $(QDSP6M_SYMLINKS)
 
 SMPLAP_IMAGES := \
     smplap32.b00 smplap32.b01 smplap32.b02 smplap32.b03 smplap32.b04 smplap32.b05 \
-    smplap32.b06 smplap32.mdt
+    smplap32.b06 smplap32.mdt smplap64.b00 smplap64.b01 smplap64.b02 smplap64.b03 \
+    smplap64.b04 smplap64.b05 smplap64.b06 smplap64.mdt
 
 SMPLAP_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(SMPLAP_IMAGES)))
 $(SMPLAP_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
@@ -203,5 +205,7 @@ ALL_DEFAULT_INSTALLED_MODULES += $(WV_SYMLINKS)
 $(shell mkdir -p $(TARGET_OUT)/etc/firmware/wlan/prima; \
     ln -sf /data/misc/wifi/WCNSS_qcom_cfg.ini \
 	    $(TARGET_OUT)/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini)
+
+include device/bq/gohan/tftp.mk
 
 endif

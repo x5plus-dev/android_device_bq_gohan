@@ -1,23 +1,91 @@
 # Audio
-audio.dolby.ds2.enabled=true
+audio_hal.period_size=192
+af.fast_track_multiplier=1
+ro.qc.sdk.audio.ssr=false
+ro.qc.sdk.audio.fluencetype=fluence
+persist.audio.fluence.voicecall=true
+persist.audio.fluence.voicerec=false
+persist.audio.fluence.speaker=false
+tunnel.audio.encode=false
+audio.offload.buffer.size.kb=64
+audio.offload.min.duration.secs=30
+audio.offload.video=true
+audio.offload.pcm.16bit.enable=true
+audio.offload.pcm.24bit.enable=true
+audio.offload.track.enable=false
+audio.deep_buffer.media=true
+use.voice.path.for.pcm.voip=true
+audio.playback.mch.downsample=true
+audio.offload.gapless.enabled=true
+audio.offload.multiple.enabled=false
+audio.safx.pbe.enabled=true
+audio.pp.asphere.enabled=false
+voice.playback.conc.disabled=true
+voice.record.conc.disabled=false
+voice.voip.conc.disabled=false
+voice.conc.fallbackpath=deep-buffer
 
+# Bluetooth
+qcom.bluetooth.soc=smd
+bluetooth.hfp.client=1
 
-persist.sys.button_jack_profile=volume
-persist.sys.button_jack_switch=0
+# Camera
+persist.camera.HAL3.enabled=1
+camera.hal1.packagelist=com.skype.raider,com.google.android.talk
 
-rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so
-rild.libargs=-d /dev/smd0
-ro.telephony.call_ring.multiple=false
-ro.telephony.default_network=22,22
-persist.radio.apm_sim_not_pwdn=1
-persist.radio.custom_ecc=1
+# CNE
+persist.cne.feature=1
 
-# set default multisim config to dsds
-persist.radio.multisim.config=dsds
-persist.radio.NO_STAPA=1
-persist.radio.rat_on=combine
-persist.radio.sib16_support=1
+# Data
+ro.use_data_netmgrd=true
+persist.data.netmgrd.qos.enable=true
+persist.data.mode=concurrent
 
+# Dex2oat threads for faster app installation
+ro.sys.fw.dex2oat_thread_count=4
+
+# Display
+debug.sf.hw=1
+debug.egl.hw=1
+persist.hwc.mdpcomp.enable=true
+debug.mdpcomp.logs=0
+dev.pm.dyn_samplingrate=1
+persist.demo.hdmirotationlock=false
+debug.enable.sglscale=1
+ro.opengles.version=196609
+ro.sf.lcd_density=480
+persist.debug.wfd.enable=1
+persist.hwc.enable_vds=1
+
+# DPM
+persist.dpm.feature=7
+persist.env.fastdorm.enabled=true
+persist.sys.dpmd.nsrm=3
+
+# Fingerprint
+persist.qfp=false
+
+# FM
+ro.fm.transmitter=false
+persist.sys.fm=qn8035
+
+# FRP
+ro.frp.pst=/dev/block/bootdevice/by-name/config
+
+# GPS
+persist.gps.qc_nlp_in_use=1
+persist.loc.nlp_name=com.qualcomm.location
+ro.gps.agps_provider=1
+
+# Media
+media.msm8956hw=1
+mm.enable.smoothstreaming=true
+mmp.enable.3g2=true
+media.aac_51_output_enabled=true
+mm.enable.qcom_parser=3407871
+vidc.enc.dcvs.extra-buff-count=2
+vidc.enc.narrow.searchrange=1
+qcom.hw.aac.encoder=true
 
 # NITZ
 persist.rild.nitz_plmn=
@@ -29,134 +97,46 @@ persist.rild.nitz_short_ons_0=
 persist.rild.nitz_short_ons_1=
 persist.rild.nitz_short_ons_2=
 persist.rild.nitz_short_ons_3=
-DEVICE_PROVISIONED=1
 
-debug.sf.hw=1
-debug.egl.hw=1
-persist.hwc.mdpcomp.enable=true
-debug.mdpcomp.logs=0
-dev.pm.dyn_samplingrate=1
-persist.demo.hdmirotationlock=false
-debug.enable.sglscale=1
-
-
-
-media.msm8956hw=0
-media.msm8956.version=0
-mm.enable.smoothstreaming=true
-mmp.enable.3g2=true
-media.aac_51_output_enabled=true
-
-ro.qc.sdk.audio.fluencetype=none
-
-voice.conc.fallbackpath=deep-buffer
-voice.playback.conc.disabled=true
-voice.record.conc.disabled=false
-voice.voip.conc.disabled=true
-
-ro.use_data_netmgrd=true
-persist.data.netmgrd.qos.enable=true
-persist.data.mode=concurrent
-
-#system props for time-services
-persist.timed.enable=true
-
-#
-# system prop for opengles version
-#
-# 131072 is decimal for 0x20000 to report version 2
-# 196608 is decimal for 0x30000 to report major/minor versions as 3/0
-# 196609 is decimal for 0x30001 to report major/minor versions as 3/1
-ro.opengles.version=196609
-
-# Bluetooth
-bluetooth.hfp.client=1
-
-# Camera
-persist.camera.HAL3.enabled=1
-
-ro.qc.sdk.audio.ssr=false
-tunnel.audio.encode=false
-#Buffer size in kbytes for compress offload playback
-audio.offload.buffer.size.kb=64
-#Minimum duration for offload playback in secs
-audio.offload.min.duration.secs=30
-#Enable offload audio video playback by default
-audio.offload.video=true
-
-#Enable PCM offload by default
-audio.offload.pcm.16bit.enable=true
-audio.offload.pcm.24bit.enable=true
-
-#Enable audio track offload by default
-audio.offload.track.enable=false
-
-#Enable music through deep buffer
-audio.deep_buffer.media=true
-
-#enable voice path for PCM VoIP by default
-use.voice.path.for.pcm.voip=true
-audio.offload.disable=1
-
-#enable downsampling for multi-channel content > 48Khz
-audio.playback.mch.downsample=true
-
-#enable dsp gapless mode by default
-audio.offload.gapless.enabled=true
-
-#multi offload
-audio.offload.multiple.enabled=false
-
-#enable pbe effects
-audio.safx.pbe.enabled=true
-
-
-# CNE/DPM
-persist.cne.feature=1
-persist.dpm.feature=5
-persist.dpm.nsrm.bkg.evt=3955
-
-
-# FRP
-ro.frp.pst=/dev/block/bootdevice/by-name/config
-
-
-# HWUI properties
-ro.hwui.texture_cache_size=72
-ro.hwui.layer_cache_size=48
-ro.hwui.r_buffer_cache_size=8
-ro.hwui.path_cache_size=32
-ro.hwui.gradient_cache_size=1
-ro.hwui.drop_shadow_cache_size=6
-ro.hwui.texture_cache_flushrate=0.4
-ro.hwui.text_small_cache_width=1024
-ro.hwui.text_small_cache_height=1024
-ro.hwui.text_large_cache_width=2048
-ro.hwui.text_large_cache_height=2048
-
-#Optimal dex2oat threads for faster app installation
-ro.sys.fw.dex2oat_thread_count=4
-
-# Perf
-ro.vendor.extension_library=libqti-perfd-client.so
+# Qualcomm
+ro.qualcomm.cabl=0
+ro.qcom.ad.calib.data=/data/misc/display/calib.cfg
+ro.qcom.ad=1
+drm.service.enabled=true
 
 # Radio
+DEVICE_PROVISIONED=1
+rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so
+rild.libargs=-d /dev/smd0
+ril.subscription.types=NV,RUIM
+telephony.lteOnCdmaDevice=1
+ro.telephony.default_network=9
+ro.telephony.call_ring.multiple=false
+persist.multisim.config=dsds
+persist.radio.multisim.config=dsds
+persist.radio.apm_sim_not_pwdn=1
+persist.radio.sib16_support=1
+persist.radio.custom_ecc=1
+persist.radio.mode_pref_nv10=0
+persist.radio.rat_on=disable
+persist.radio.proc_nw_scan=1
+persist.radio.adb_log_on
+persist.radio.mt_sms_ack=20
+keyguard.no_require_sim=true
+persist.data.qmi.adb_logmask=0
+
 # TCP
 net.tcp.2g_init_rwnd=10
 
+# Time-services
+persist.timed.enable=true
+
+# USB
+persist.sys.usb.config=diag,serial_smd,rmnet_ipa,serial_tty,mass_storage,adb
+
+# Vendor
+ro.vendor.extension_library=libqti-perfd-client.so
+ro.vendor.gt_library=libqti-gt.so
+
 # WiFi
 wifi.interface=wlan0
-
-persist.audio.dirac.speaker=true
-persist.audio.fluence.audiorec=false
-
-persist.audio.fluence.spk.mono=true
-persist.audio.fluence.voicecall=true
-persist.audio.fluence.voicerec=true
-persist.audio.fluence.speaker=true
-
-# GPS
-persist.gps.qc_nlp_in_use=1
-ro.gps.agps_provider=1
-ro.sf.lcd_density=480
-persist.loc.nlp_name=com.qualcomm.location
